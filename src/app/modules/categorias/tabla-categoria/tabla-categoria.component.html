@@ -30,31 +30,33 @@
 
   <mat-divider></mat-divider>
   <section *ngIf="productsSelect?.length > 0 ">
-    <mat-grid-list cols="2" rowHeight="350px">
-      <mat-grid-tile [colspan]="1" [rowspan]="1" *ngFor="let item of productsSelect">
-        <mat-card class="dashboard-card">
-          <mat-card-header>
-            <mat-card-title>
-              id.- {{item.id}}
-              <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu" xPosition="before">
-                <button mat-menu-item (click)="editarProducto(item)">Editar</button>
-                <button mat-menu-item (click)="deleteProduct(item)">Eliminar</button>
-              </mat-menu>
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="dashboard-card-content">
-            <mat-list role="list">
-              <mat-list-item role="listitem">Nombre: {{item.nombre || 'No tiene nombre'}}</mat-list-item>
-              <mat-list-item role="listitem">Precio: {{item.precio || 'No tiene precio'}}</mat-list-item>
-            </mat-list>
 
-          </mat-card-content>
-        </mat-card>
-      </mat-grid-tile>
-    </mat-grid-list>
+    <div class="horizontal-card-list">
+      <mat-card class="responsive-card" *ngFor="let item of productsSelect" style="width: 300px;">
+        <mat-card-header>
+          <mat-card-title>
+           
+            <p class="ellipsis-text"> ID.- {{item.id}}</p>
+            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item (click)="editarProducto(item)">Editar</button>
+              <button mat-menu-item (click)="deleteProduct(item)">Eliminar</button>
+            </mat-menu>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <mat-list role="list">
+            <mat-list-item role="listitem">Nombre: {{item.nombre || 'No tiene nombre'}}</mat-list-item>
+            <mat-list-item role="listitem">Precio: {{item.precio || 'No tiene precio'}}</mat-list-item>
+          </mat-list>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+
   </section>
 
   <section *ngIf="productsSelect.length == 0 " style="    text-align: center;

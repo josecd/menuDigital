@@ -29,6 +29,7 @@ import { environment } from 'src/environments/environment.development';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { DashComponent } from './modules/categorias/dash/dash.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatGridListModule,
     MatDividerModule,
     MatProgressSpinnerModule,
+    FlexLayoutModule,
     
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,

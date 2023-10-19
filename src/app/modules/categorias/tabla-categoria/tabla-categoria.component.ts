@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, HostListener, OnInit, inject } from '@angular/core';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 import { ProductoService } from 'src/app/services/producto/producto.service';
 
@@ -12,9 +12,20 @@ import Swal from 'sweetalert2'
 @Component({
   selector: 'app-tabla-categoria',
   templateUrl: './tabla-categoria.component.html',
-  styleUrls: ['./tabla-categoria.component.scss']
+  styleUrls: ['./tabla-categoria.component.scss'],
 })
 export class TablaCategoriaComponent implements OnInit {
+  cols: number = 2; // Default number of columns
+
+  // Define the breakpoint at which you want to change the number of columns
+  breakpoint: number = 768;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    this.adjustGridCols(event.target.innerWidth);
+  }
+
+  /////////////////
   private readonly _categoria = inject(CategoriaService);
   private readonly _producto = inject(ProductoService);
 
@@ -30,6 +41,7 @@ export class TablaCategoriaComponent implements OnInit {
 
   loading = true;
   ngOnInit(): void {
+    this.adjustGridCols(window.innerWidth);
     this._categoria.getCategoria().subscribe(res => {
       this.categorias = res
       this.onChipSelected(this.categorias[this.select], this.select)
@@ -37,6 +49,19 @@ export class TablaCategoriaComponent implements OnInit {
 
     })
   }
+
+  adjustGridCols(screenWidth: number): void {
+    if (screenWidth <= this.breakpoint) {
+      this.cols = 1; // Adjust the number of columns for smaller screens
+    } else {
+      this.cols = 2; // Default number of columns for larger screens
+    }
+  }
+
+  getGridTileStyle() {
+    return { 'flex': '0 0 calc(50% - 8px)' }; // Adjust the tile size as needed
+  }
+
 
   onChipSelected(item: any, index: any) {
     this.productsSelect = []
