@@ -20,7 +20,8 @@ const routes: Routes = [
         component: TablaCategoriaComponent
       },
     ]
-  }
+  },
+  { path: '**', redirectTo: 'categoria/lista' }
 ];
 
 @NgModule({

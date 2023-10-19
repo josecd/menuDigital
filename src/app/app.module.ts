@@ -16,6 +16,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 import { AngularFireModule } from '@angular/fire/compat';
@@ -50,7 +52,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatChipsModule,
     MatCardModule,
     MatGridListModule,
-
+    MatDividerModule,
+    MatProgressSpinnerModule,
     
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,

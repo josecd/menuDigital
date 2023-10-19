@@ -1,14 +1,34 @@
-<div class="grid-container">
-  <h1 class="mat-h1">Categorias</h1>
+<mat-card class="example-card" style="align-items: center;" *ngIf="loading" >
+  <mat-card-content style="text-align: center;">
 
+    <mat-spinner></mat-spinner>
+
+  </mat-card-content>
+</mat-card>
+
+
+<div class="grid-container" *ngIf="!loading" >
+  <h1 class="mat-h1">Categorias
+          <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="agregarCategorias()">
+            <mat-icon>add</mat-icon>
+          </button>
+
+  </h1>
+
+  
   <mat-chip-listbox aria-label="Fish selection">
     <mat-chip-option *ngFor="let item of categorias; let i = index" [selected]="i === selectedcategoriaIndex"
       (click)="onChipSelected(item,i)">
       {{item.nombre}}
     </mat-chip-option>
   </mat-chip-listbox>
+  <mat-divider></mat-divider>
 
+  <div class="example-button-row" style="text-align: center;">
+    <button mat-raised-button color="primary" style="width: 50%;" (click)="agregarProducto()">Crear producto</button>
+  </div>
 
+  <mat-divider></mat-divider>
   <section *ngIf="productsSelect?.length > 0 ">
     <mat-grid-list cols="2" rowHeight="350px">
       <mat-grid-tile [colspan]="1" [rowspan]="1" *ngFor="let item of productsSelect">
@@ -20,8 +40,8 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu" xPosition="before">
-                <button mat-menu-item>Editar</button>
-                <button mat-menu-item>Eliminar</button>
+                <button mat-menu-item (click)="editarProducto(item)">Editar</button>
+                <button mat-menu-item (click)="deleteProduct(item)">Eliminar</button>
               </mat-menu>
             </mat-card-title>
           </mat-card-header>
@@ -37,14 +57,11 @@
     </mat-grid-list>
   </section>
 
-  <section *ngIf="productsSelect.length == 0 ">
+  <section *ngIf="productsSelect.length == 0 " style="    text-align: center;
+  padding-top: 15%;">
+    <h1>No contiene productos</h1>
 
 
-    <mat-grid-list cols="1" rowHeight="1:1">
-      <mat-grid-tile>
-        <h1>No contiene productos</h1>
-      </mat-grid-tile>
-
-    </mat-grid-list>
+   
   </section>
 </div>

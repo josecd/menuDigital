@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "cat": "categoriasproductos",
+    "default": "categoriasproductos"
+  },
+  "targets": {},
+  "etags": {}
+}
